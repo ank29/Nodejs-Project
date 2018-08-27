@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
   db.query('select * from Users',function(err,result){
 
     if(err) throw err;
-      res.send(result);
+      res.send({data : result });
 
   });
 });
@@ -23,13 +23,14 @@ router.get('/:id', function(req, res) {
      res.send({data : result });
    });
 });
-router.get('/:email/:pass', function(req, res) {
-   var email= req.params.email;
-   var password = req.params.pass;
+
+router.post('/', function(req, res) {
+   var email= req.body.email;
+   var password = req.body.pass;
    db.query('select * from Users where email = ? and password = ?',[email,password],function(err,result,fields){
 
      if(err) throw err;
-     res.send(result);
+     res.send({data : result });
    });
 });
 
